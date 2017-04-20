@@ -125,6 +125,8 @@
                 android:linksClickable="true"
                 android:autoLink="web"
                 android:padding="2dp"
+                android:singleLine="true"
+                android:maxLines="1"
                 android:textColor="@color/colorsecondaryText"
                 android:text="@string/readOnWeb"
                 android:textSize="16sp" />
@@ -154,7 +156,7 @@
                 android:layout_marginTop="10dp"
                 android:linksClickable="true"
                 android:padding="2dp"
-                android:textColor="@color/colorsecondaryText"
+                android:textColor="@color/colorAccent"
                 android:text="@string/author"
                 android:textSize="18sp" />
 
