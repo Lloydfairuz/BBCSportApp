@@ -1,10 +1,16 @@
 package farouk.appsolute.bbcsportapp;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +33,7 @@ import farouk.appsolute.bbcsportapp.utils.Utils;
 
 public class DetailActivity extends AppCompatActivity {
 
+    private static final int MY_PERMISSIONS_REQUEST_READ_WRITE_STORAGE = 1;
     private Intent intent;
     private FloatingActionButton favNews;
     private TextView newsTitle, newsFull, newDescription, newAuthors;
@@ -39,7 +46,11 @@ public class DetailActivity extends AppCompatActivity {
 
         intent = getIntent();
 
+        checkPermissionIsGrantOrNot();
+
         favNews = (FloatingActionButton) findViewById(R.id.fav_news);
+        disableFavBtn();
+
         newsTitle = (TextView) findViewById(R.id.news_title);
         newDescription = (TextView) findViewById(R.id.news_description);
         newAuthors = (TextView) findViewById(R.id.news_author);
@@ -55,14 +66,10 @@ public class DetailActivity extends AppCompatActivity {
         favNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dao dao = new Dao(DetailActivity.this);
-                NewsModel newsModel = new NewsModel(intent.getStringExtra(Utils.Json_author),intent.getStringExtra(Utils.Json_title),intent.getStringExtra(Utils.Json_description),
-                        intent.getStringExtra(Utils.Json_imgUrl),intent.getStringExtra(Utils.Json_fullNewUrl),intent.getStringExtra(Utils.Json_publishDate));
-
-                if(dao.add(newsModel) == 1){
-                    Toast.makeText(DetailActivity.this,"Article enrégistré dans les favoris",Toast.LENGTH_SHORT).show();
-                }
-
+                addToFav();
+                favNews.setImageDrawable(getResources().getDrawable(R.drawable.ic_heart));
+                favNews.setEnabled(false);
+                Toast.makeText(DetailActivity.this,"Article enrégistré dans les favoris",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -83,7 +90,6 @@ public class DetailActivity extends AppCompatActivity {
                     }).centerCrop().into(newsImg);
 
         }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -107,5 +113,73 @@ public class DetailActivity extends AppCompatActivity {
             }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void checkPermissionIsGrantOrNot(){
+        if ((ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) &&
+                ((ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED))) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE) && ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_REQUEST_READ_WRITE_STORAGE);
+            }
+        } else {
+           // addToFav();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_READ_WRITE_STORAGE: {
+
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //addToFav();
+                } else {
+                }
+                return;
+            }
+        }
+    }
+
+    public void disableFavBtn(){
+        Dao dao = new Dao(DetailActivity.this);
+        if (dao.getAllFavNews().size() > 0){
+            for (int i = 0;i<dao.getAllFavNews().size();i++){
+                if ((dao.getAllFavNews().get(i).getFullArticleUrl()).equals(""+intent.getStringExtra(Utils.Json_fullNewUrl))){
+                    favNews.setImageDrawable(getResources().getDrawable(R.drawable.ic_heart));
+                    favNews.setEnabled(false);
+                }
+            }
+        }
+    }
+    public void addToFav(){
+        Dao dao = new Dao(DetailActivity.this);
+        if (dao.getAllFavNews().size() > 0){
+            for (int i = 0;i<dao.getAllFavNews().size();i++){
+                if ((dao.getAllFavNews().get(i).getFullArticleUrl()).equals(""+intent.getStringExtra(Utils.Json_fullNewUrl))){
+                    favNews.setVisibility(View.GONE);
+                }else {
+                    NewsModel newsModel = new NewsModel(intent.getStringExtra(Utils.Json_author),intent.getStringExtra(Utils.Json_title),intent.getStringExtra(Utils.Json_description),
+                            intent.getStringExtra(Utils.Json_imgUrl),intent.getStringExtra(Utils.Json_fullNewUrl),intent.getStringExtra(Utils.Json_publishDate));
+
+                    dao.add(newsModel);
+                    break;
+                }
+            }
+        }else {
+            NewsModel newsModel = new NewsModel(intent.getStringExtra(Utils.Json_author),intent.getStringExtra(Utils.Json_title),intent.getStringExtra(Utils.Json_description),
+                    intent.getStringExtra(Utils.Json_imgUrl),intent.getStringExtra(Utils.Json_fullNewUrl),intent.getStringExtra(Utils.Json_publishDate));
+
+            dao.add(newsModel) ;
+        }
     }
 }
