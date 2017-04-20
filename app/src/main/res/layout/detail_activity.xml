@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/main.appbar"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true"
+        >
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/main.collapsing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleMarginStart="48dp"
+            app:expandedTitleMarginEnd="64dp"
+            >
+
+            <ImageView
+                android:id="@+id/news_img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:fitsSystemWindows="true"
+                app:layout_collapseMode="parallax" />
+
+            <include layout="@layout/detail_toolbar"/>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <RelativeLayout android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="8dp">
+
+            <ImageView
+                android:id="@+id/titleIcon"
+                android:src="@drawable/ic_label_outline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2dp"/>
+
+            <TextView
+                android:layout_margin="4dp"
+                android:layout_toRightOf="@id/titleIcon"
+                android:id="@+id/news_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:lineSpacingExtra="8dp"
+                android:text="Titre"
+                android:padding="2dp"/>
+
+            <View
+                android:id="@+id/sepOne"
+                android:layout_below="@id/news_title"
+                android:background="#000000"
+                android:layout_height="0.5dp"
+                android:layout_width="match_parent" />
+
+            <ImageView
+                android:id="@+id/descriptionIcon"
+                android:layout_below="@id/sepOne"
+                android:src="@drawable/ic_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2dp"/>
+
+
+            <TextView
+                android:layout_margin="4dp"
+                android:layout_below="@id/sepOne"
+                android:layout_toRightOf="@id/descriptionIcon"
+                android:layout_marginTop="10dp"
+                android:id="@+id/news_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:lineSpacingExtra="8dp"
+                android:text="description"
+                android:padding="2dp"/>
+
+            <View
+                android:id="@+id/sepTwo"
+                android:layout_below="@id/news_description"
+                android:background="#000000"
+                android:layout_height="0.5dp"
+                android:layout_width="match_parent" />
+
+            <ImageView
+                android:id="@+id/onWebIcon"
+                android:layout_below="@id/sepTwo"
+                android:src="@drawable/ic_web"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2dp"/>
+
+            <TextView
+                android:layout_margin="4dp"
+                android:layout_toRightOf="@id/onWebIcon"
+                android:layout_below="@id/sepTwo"
+                android:id="@+id/news_full"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:lineSpacingExtra="8dp"
+                android:linksClickable="true"
+                android:autoLink="web"
+                android:padding="2dp"
+                android:text="@string/readOnWeb"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/sepThree"
+                android:layout_below="@id/news_full"
+                android:background="#000000"
+                android:layout_height="0.5dp"
+                android:layout_width="match_parent" />
+
+            <ImageView
+                android:layout_below="@id/sepThree"
+                android:id="@+id/authorIcon"
+                android:src="@drawable/ic_lead_pencil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2dp"/>
+
+            <TextView
+                android:layout_margin="4dp"
+                android:layout_toRightOf="@id/authorIcon"
+                android:layout_below="@id/sepThree"
+                android:id="@+id/news_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:lineSpacingExtra="8dp"
+                android:linksClickable="true"
+                android:padding="2dp"
+                android:text="@string/author"
+                android:textSize="18sp" />
+
+
+        </RelativeLayout>
+
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fav_news"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_margin="2dp"
+        android:src="@drawable/ic_heart_outline"
+        app:layout_anchor="@id/main.appbar"
+        app:layout_anchorGravity="bottom|right|end"/>
+
+</android.support.design.widget.CoordinatorLayout>

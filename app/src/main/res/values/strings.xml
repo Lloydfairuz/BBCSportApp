@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">BBC Sport App</string>
+    <string name="api_key">53038e4ec688431daca941d329ad93b7</string>
+    <string name="readOnWeb">Lire l\'article en entier sur le web</string>
+    <string name="author">Auteur :</string>
+    <string name="share">partager</string>
+    <string name="my_favs">Mes favoris</string>
+</resources>
