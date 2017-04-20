@@ -59,8 +59,8 @@ public class DetailActivity extends AppCompatActivity {
 
         newsTitle.setText(""+intent.getStringExtra(Utils.Json_title));
         newDescription.setText(""+intent.getStringExtra(Utils.Json_description));
-        newAuthors.setText(newAuthors.getText()+" "+intent.getStringExtra(Utils.Json_author));
-        newsFull.setText(newsFull.getText()+" : "+intent.getStringExtra(Utils.Json_fullNewUrl));
+        newAuthors.setText(" "+intent.getStringExtra(Utils.Json_author));
+        newsFull.setText(" "+intent.getStringExtra(Utils.Json_fullNewUrl));
 
 
         favNews.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +87,7 @@ public class DetailActivity extends AppCompatActivity {
                         public boolean onResourceReady(Bitmap resource, String model, Target<Bitmap> target, boolean isFromMemoryCache, boolean isFirstResource) {
                             return false;
                         }
-                    }).centerCrop().into(newsImg);
+                    }).placeholder(R.mipmap.ic_launcher).centerCrop().into(newsImg);
 
         }
 

@@ -28,6 +28,7 @@
             >
 
             <ImageView
+                android:layout_marginTop="20dp"
                 android:id="@+id/news_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -63,44 +64,45 @@
                 android:id="@+id/news_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:lineSpacingExtra="8dp"
+                android:textSize="18sp"
                 android:text="Titre"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
                 android:padding="2dp"/>
 
             <View
                 android:id="@+id/sepOne"
                 android:layout_below="@id/news_title"
-                android:background="#000000"
+                android:background="@color/colorDivider"
                 android:layout_height="0.5dp"
                 android:layout_width="match_parent" />
 
             <ImageView
-                android:id="@+id/descriptionIcon"
                 android:layout_below="@id/sepOne"
-                android:src="@drawable/ic_label"
+                android:id="@+id/descriptionIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="2dp"/>
-
 
             <TextView
                 android:layout_margin="4dp"
                 android:layout_below="@id/sepOne"
                 android:layout_toRightOf="@id/descriptionIcon"
+                android:layout_toEndOf="@id/titleIcon"
                 android:layout_marginTop="10dp"
                 android:id="@+id/news_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:lineSpacingExtra="8dp"
-                android:text="description"
-                android:padding="2dp"/>
+                android:textSize="16sp"
+                android:textColor="@color/colorsecondaryText"
+                android:text="Description"
+                android:padding="2dp"
+                android:textAlignment="gravity"/>
 
             <View
                 android:id="@+id/sepTwo"
                 android:layout_below="@id/news_description"
-                android:background="#000000"
+                android:background="@color/colorDivider"
                 android:layout_height="0.5dp"
                 android:layout_width="match_parent" />
 
@@ -120,24 +122,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:lineSpacingExtra="8dp"
                 android:linksClickable="true"
                 android:autoLink="web"
                 android:padding="2dp"
+                android:textColor="@color/colorsecondaryText"
                 android:text="@string/readOnWeb"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <View
                 android:id="@+id/sepThree"
                 android:layout_below="@id/news_full"
-                android:background="#000000"
+                android:background="@color/colorDivider"
                 android:layout_height="0.5dp"
                 android:layout_width="match_parent" />
 
             <ImageView
                 android:layout_below="@id/sepThree"
                 android:id="@+id/authorIcon"
-                android:src="@drawable/ic_lead_pencil"
+                android:src="@drawable/ic_account_outline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="2dp"/>
@@ -150,9 +152,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:lineSpacingExtra="8dp"
                 android:linksClickable="true"
                 android:padding="2dp"
+                android:textColor="@color/colorsecondaryText"
                 android:text="@string/author"
                 android:textSize="18sp" />
 

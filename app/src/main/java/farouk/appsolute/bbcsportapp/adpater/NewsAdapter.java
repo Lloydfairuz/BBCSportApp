@@ -59,7 +59,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         System.out.println("split res: "+t[0]);
 
         if (!data.get(position).getPublishedDate().equals("null")){
-            newsHolder.getNewsDate().setText(""+t[0].split("\\-")[2]+"-"+t[0].split("\\-")[1]+"-"+t[0].split("\\-")[0]+" à "+t[1].split("\\+")[0]);
+            newsHolder.getNewsDate().setText(""+t[0].split("\\-")[2]+"/"+t[0].split("\\-")[1]+"/"+t[0].split("\\-")[0]+" •• "+t[1].split("\\+")[0].split(":")[0]+":"+t[1].split("\\+")[0].split(":")[1]);
         }else {
             newsHolder.getNewsDate().setText("");
         }
@@ -79,7 +79,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         public boolean onResourceReady(Bitmap resource, String model, Target<Bitmap> target, boolean isFromMemoryCache, boolean isFirstResource) {
                             return false;
                         }
-                    }).centerCrop().into(newsHolder.getNewsImg());
+                    }).placeholder(R.mipmap.ic_launcher).centerCrop().into(newsHolder.getNewsImg());
 
         }
 
